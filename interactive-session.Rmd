@@ -77,13 +77,13 @@ anti_join_test <- animals %>%
   
 #---- for loop?----  
 joins <- c("full", "left", "right", "inner")
+#examples <- vector("character", length = length(joins))
 
 for (i in seq_along(joins)) {
   name <- paste0(joins[i], "_join_example_loop")
   fun <- paste0(joins[i], "_join")
-  print(get(fun)(animals, sites))
+  examples[i] <- print(get(fun)(animals, sites))
 }
-
 ```
 
 ˆ
