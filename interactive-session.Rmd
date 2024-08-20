@@ -195,6 +195,7 @@ head(firewalkers)
 ```{r}
 feedback <- c(" I ate    some nachos", "Wednesday morning   ")
 str_squish(feedback)
+str_trim(feedback) #removes leading and trailing white spaces
 
 str_to_lower(feedback)
 str_to_upper(feedback)
