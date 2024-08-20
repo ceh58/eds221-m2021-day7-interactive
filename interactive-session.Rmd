@@ -19,7 +19,7 @@ library(palmerpenguins)
 library(lubridate)
 ```
 
-## Refresher 1:
+### Refresher 1:
 
 ```{r}
 new_penguins <- penguins %>%
@@ -29,7 +29,7 @@ new_penguins <- penguins %>%
   filter(location == c("Biscoe", "Dream"))
 ```
 
-## Refresher 2:
+### Refresher 2:
 
 ```{r}
 new_penguins_2 <- penguins %>%
@@ -40,10 +40,50 @@ new_penguins_2 <- penguins %>%
             sample_size = n())
 ```
 
-## Task 3
+## Task 3. Practice with joins.
 
 ```{r}
 install.packages("datapasta")
+animals <- tibble::tribble(
+  ~location,   ~species,  ~maturity,
+   "lagoon",   "bobcat",    "adult",
+    "bluff",   "coyote", "juvenile",
+    "creek",      "fox",    "adult",
+     "oaks", "squirrel", "juvenile",
+    "bluff",   "bobcat",    "adult"
+  )
+sites <- tibble::tribble(
+           ~location,      ~full_site_name, ~jurisdiction,
+             "beach",       "Goleta Beach",     "SB City",
+            "lagoon",        "UCSB Lagoon",        "UCSB",
+             "bluff",       "Ellwood Mesa",     "SB City",
+              "oaks", "Fremont Campground",        "USFS"
+           )
+full_join_example <- full_join(animals, sites)
+left_join_example <- left_join(animals, sites)
+right_join_example <- right_join(animals, sites)
+inner_join_example <- inner_join(animals, sites)
+
+semi_join_example <- semi_join(animals, sites)
+#is the same as:
+semi_join_test <- animals %>%
+  filter(location %in% sites$location)
+
+anti_join_example <- anti_join(animals, sites)
+#is the same as:
+anti_join_test <- animals %>%
+  filter(!location %in% sites$location)
+  
+  
+#---- for loop?----  
+joins <- c("full", "left", "right", "inner")
+
+for (i in seq_along(joins)) {
+  name <- paste0(joins[i], "_join_example_loop")
+  fun <- paste0(joins[i], "_join")
+  print(get(fun)(animals, sites))
+}
+
 ```
 
 ˆ
